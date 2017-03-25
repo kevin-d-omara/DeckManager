@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DeckManager
 {
-    public class Deck : MonoBehaviour
+    public class Deck
     {
         
     }
