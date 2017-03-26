@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System.IO;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,16 +16,36 @@ namespace DeckManager
         /// or "\Custom\HellOnEarth.deck").</param>
         public Deck(string pathToDeckFile)
         {
-            string[] lines = System.IO.File.ReadAllLines("Assets\\Decks\\" + pathToDeckFile);
+            var fullPathToDeck = Path.Combine(Application.dataPath, "Decks");
+            fullPathToDeck = Path.Combine(fullPathToDeck, pathToDeckFile);
+            string[] lines = System.IO.File.ReadAllLines(fullPathToDeck);
 
-            var pathToCards = "Assets\\Cards\\" + lines[0];
+            var fullPathToCards = Path.Combine(Application.dataPath, "Cards");
+            fullPathToCards = Path.Combine(fullPathToCards, lines[0]);
 
             for (int i = 1; i < lines.Length; ++i)
             {
-                var pathToCard = pathToCards + lines[i] + ".jpg";
+                var pathToCard = Path.Combine(fullPathToCards, lines[i]);
+                pathToCard += ".jpg";
                 Sprite image = LoadNewSprite(pathToCard);
                 Cards.Add(new Card(lines[i], image));
             }
+        }
+
+        public IEnumerator LoadSprite(string absoluteImagePath)
+        {
+            string  finalPath;
+            WWW     localFile;
+            Texture texture;
+            Sprite  sprite;
+
+            finalPath = "file://" + absoluteImagePath;
+            localFile = new WWW(finalPath);
+
+            yield return localFile;
+
+            texture = localFile.texture;
+            sprite = Sprite.Create(texture as Texture2D, new Rect(0, 0, texture.width, texture.height), Vector2.zero);
         }
 
         /// <summary>
