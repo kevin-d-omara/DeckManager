@@ -15,16 +15,25 @@ namespace DeckManager
             Debug.Log("start creating deck");
             deck = new Deck(deckFile);
             Debug.Log("end creating deck");
+
+            CreateObjectsFromCards();
         }
 
         private void Update()
         {
+#if UNITY_STANDALONE || UNITY_EDITOR
             if (Input.GetButtonDown("Fire1"))
             {
                 Debug.Log("start create objects from cards");
                 CreateObjectsFromCards();
                 Debug.Log("end create objects from cards");
             }
+#elif UNITY_IOS || UNITY_ANDROID || UNITY_WP8 || UNITY_IPHONE
+            if (Input.touchCount > 0)
+            {
+                CreateObjectsFromCards();
+            }
+#endif
         }
 
         private void CreateObjectsFromCards()
