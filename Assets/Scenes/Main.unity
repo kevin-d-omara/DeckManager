@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 1831003801}
   - component: {fileID: 1831003800}
   - component: {fileID: 1831003799}
+  - component: {fileID: 1831003804}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -151,7 +152,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 15
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -178,3 +179,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1831003804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1831003798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68b6b1985ba8a1740936ff506144ddb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deckFile: Season1_Spawn.deck
+  cardPrefab: {fileID: 1872166503336164, guid: 530c242b480848c4094cc701611b91b6, type: 2}
